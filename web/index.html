@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Крестики-нолики · Лабораторная № 2</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site"><span class="brand"><b>×</b><i>○</i></span><span>Лабораторная работа № 2</span></header>
+  <main>
+    <div class="intro">
+      <h1>Крестики<span>–</span>нолики</h1>
+      <p>Сыграйте против компьютера или сравните алгоритмы поиска на своей позиции.</p>
+    </div>
+    <div class="layout">
+      <section class="panel arena" aria-label="Игровое поле">
+        <div class="modes" aria-label="Режим">
+          <button id="play" type="button" aria-pressed="true">Игра</button>
+          <button id="analysis" type="button" aria-pressed="false">Анализ позиции</button>
+        </div>
+        <div class="status"><span id="status" role="status"></span><span id="turn" aria-hidden="true"></span></div>
+        <div id="board" aria-label="Поле три на три"></div>
+        <div class="arena-footer">
+          <span><b class="x-text">×</b> <span id="x-label">Вы</span></span>
+          <span><b class="o-text">○</b> <span id="o-label">Компьютер</span></span>
+          <button type="button" id="reset">↻ <span>Новая игра</span></button>
+        </div>
+      </section>
+      <div class="side">
+        <section class="panel settings" aria-labelledby="search-heading">
+          <h2 id="search-heading">Поиск хода</h2>
+          <label for="method">Алгоритм</label>
+          <select id="method"><option value="alphabeta">Альфа-бета + кеш</option><option value="minimax">Минимакс</option></select>
+          <div id="editor" hidden>
+            <label for="position">Позиция по строкам</label>
+            <div class="input-row"><input id="position" value="........." maxlength="9" spellcheck="false" autocomplete="off" aria-describedby="position-help"><button id="load" type="button">Задать</button></div>
+            <p id="position-help">X, O и точка. Нажатие на клетку меняет её знак.</p>
+            <button type="button" id="example">Загрузить пример</button>
+          </div>
+          <div class="actions">
+            <button type="button" id="recommend" class="primary">Найти ход O</button>
+            <button type="button" id="compare">Сравнить</button>
+          </div>
+          <p id="message" role="status"></p>
+        </section>
+        <section class="panel results" aria-labelledby="results-heading">
+          <div class="results-header"><h2 id="results-heading">Результаты</h2><button type="button" id="csv" disabled>↓ CSV</button></div>
+          <p id="results-info">Здесь появятся координаты хода и время поиска.</p>
+          <div id="metrics"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
