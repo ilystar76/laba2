@@ -1,19 +1,23 @@
 #pragma once
-#include <array>
-#include <cstdint>
-#include <string_view>
+#include <string>
 
-namespace xo {
-using Board = std::array<char, 9>;
-enum class Method { Minimax, AlphaBeta };
-struct Result {
+enum class Method { Minimax, AlphaBeta, Avl, Sorted };
+constexpr Method methods[] = {Method::Minimax, Method::AlphaBeta, Method::Avl, Method::Sorted};
+constexpr int positionCount = 19683;
+
+std::string methodName(Method method);
+std::string methodId(Method method);
+
+struct SearchResult {
     int move = -1;
     int score = 0;
-    std::uint64_t nodes = 0;
-    std::uint64_t cuts = 0;
-    std::uint64_t hits = 0;
+    int nodes = 0;
+    int cuts = 0;
+    int hits = 0;
 };
-char winner(const Board& board);
-Board parsePosition(std::string_view text);
-Result solve(Board board, Method method);
-}
+
+char winner(std::string board);
+int positionCode(std::string board);
+std::string positionFromCode(int code);
+std::string positionError(std::string board);
+SearchResult findMove(std::string board, Method method);
